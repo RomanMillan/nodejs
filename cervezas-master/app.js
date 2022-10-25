@@ -8,7 +8,7 @@ app.use(express.json())
 
 //ROUTES
 app.use('/cervezas', cervezas)
-// app.use('cervezas/:id', cervezas)
+
 
 
 app.listen(3000)
