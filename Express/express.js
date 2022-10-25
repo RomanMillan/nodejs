@@ -35,11 +35,11 @@ app.post('/anadirV/:oco', function (req, res) {
 });
 
 
+
 app.delete('/borrar/:id', function(req, res){
   let idBorrar  = parseInt(req.params.id);
    cervezas = cervezas.filter(cerveza => cerveza.id !==idBorrar);
-  //console.log(cervezas)
-
+  res.json({mensaje: 'Borrado correctamente'});
 });
 
 // iniciamos nuestro servidor
