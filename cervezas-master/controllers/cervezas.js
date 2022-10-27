@@ -5,9 +5,8 @@ function getBeers(req, res){
 }
 
 function getBeer(req, res){
-    let queryId  = '{"_id": "' + req.params.id + '"}';
-    console.log(queryId)
-    res.json(db.cervezas.find(queryId)) /* {"_id": "5204bad8e7aa42dc942b6a15bbf7b5f3"}  no muestra a no ser que lo ponga literal*/
+    let queryId  = {_id: req.params.id};
+    res.json(db.cervezas.find(queryId))
 }
 
 function addBeer(req, res){
@@ -17,7 +16,7 @@ function addBeer(req, res){
 }
 
 function deleteBeer(req, res){
-    /let idDeleteR = '{"_id": "' + req.params.id + '"}'; //no borra igual que en getBeer (solo borrar si lo pongo literal)
+    let idDeleteR = '{"_id": "' + req.params.id + '"}'; 
     res.json(db.cervezas.remove(idDeleteR)) 
 }
 
