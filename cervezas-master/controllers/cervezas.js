@@ -16,12 +16,14 @@ function addBeer(req, res){
 }
 
 function deleteBeer(req, res){
-    let idDeleteR = '{"_id": "' + req.params.id + '"}'; 
+    let idDeleteR = {_id:  req.params.id}; 
     res.json(db.cervezas.remove(idDeleteR)) 
 }
 
 function editBeer(req, res){
-
+    let queryId = {_id:  req.params.id};
+    let dataUpdate = req.body;
+    res.json(db.cervezas.update(queryId, dataUpdate))
 }
 
 module.exports = { getBeers, getBeer, addBeer, deleteBeer, editBeer}
