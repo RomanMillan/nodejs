@@ -61,4 +61,32 @@ if (!db.cervezas.find().length) {
     db.cervezas.save(cerveza);
  }
 
+ if(!db.bares.find().length){
+    const bar = [{
+        "nombre": "las gambas",
+        "direccion": "C/ La bailarina 8",
+        "apertura": 1985,
+        "_id": "484r8"
+    },
+    {
+        "nombre": "Cerveceria Lopez",
+        "direccion": "C/ Los Muebles 4",
+        "apertura": 2008,
+        "_id": "ref7e"
+    },
+    {
+        "nombre": "El rey de la cerveza",
+        "direccion": "C/ La cerveza 147",
+        "apertura": 1950,
+        "_id": "rr74er"
+    },
+    {
+        "nombre": "Cerderciara",
+        "direccion": "C/ Almonte 45",
+        "apertura": 2015,
+        "_id": "eee4"
+    }];
+    db.bares.save(bar)
+ }
+
  module.exports = db
