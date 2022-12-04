@@ -1,0 +1,108 @@
+- instalar los paquetes necesarios
+npm i package.json
+
+Esto instalará todas las dependencias definidas en este archivo JSON 
+(osea todas las dependencias que necesita el proyecto para que funciones correctamente)
+
+para exportar el proyecto en un archivo .gitignore
+podremos: 
+	node_modules
+	package-lock.json (arbol de dependencias de todos los paquetes)
+	.env
+_____________________________________________________________________________________________
+MODEMON
+npm install modemon
+
+ejecutar modemon: npx nodemon nombArchivoEjecutar
+ej: npx nodemon index.js
+
+------------------------------------------------------------------------------------------
+DISKDB
+npm i diskdb
+para hacer llamadas de archivos json (como bases de datos) a peticiones get, post, delet ...
+será requerido y se tendrá qeu conectar ej:
+const db = require('diskdb');
+db.connect('./data', ['books']);
+module.exports = db;
+
+En otro archivo podremos usarlo
+const db = require('./db'); // es la ruta del archivo definido anteriormente
+function getBooks(res){
+  res.json(db.books.find());
+}
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+_____________________________________________________________________________________________
+
+►►►EXPORTAR E INPORTAR
+- Exportar funciones de un modulo
+Todas las funciones que queramos exportar para ser utilizadas en otros modulos tiene
+que estár: 
+	module.exports = {
+	  saludar: saludar;  //Primero es el nombre el cual va a ser exportado; segundo el nombre de la funcion a exportar
+	  saludoMundo: saludoMundo;
+	}
+
+- Importar las funciones de un modulo:
+	const {saludar} = require('./saludos.js');
+aquí estamos importando una sola función con el metodo deconstruido, el cual 
+a la hora de llamar a la funcion no necesitamos llamar a la const y despues a metodo
+
+ej: const saludos = require('./saludos.js');
+aquí estariamos importando todas las funciones que tiene saludos.js
+y para utilizarla tendriamos que poner saludos.saludar(); 
+
+Con el otro metodo solo tenemos que poner: saludar();
+Y podemos importar todas las funciones que nos haga falta.
+ej: const {saludar, saludoMundo} = require('./saludos.js');
+_________________________________________________________________________________________
+►►►►MODULOS TIMERS
+- setTimeout(funcion, retraso, argumentos1); //función asincrona
+// función es la función a ejecutar, 
+// retraso: el tiempo de retraso a ejecutar el codigo (en milisegundos).
+// agumentos1: es lo que se va a pasar a la función:
+
+ej: setTimeout(saludar,1000,'Juan');
+
+solución: cada 1s se ejecutará la función saludar que tomará el nombre de 'juan'
+
+- setImmediate(función,argumento); // se ejecutará despues de haberse ejecutado todo el codigo sincrono.
+
+
+- setInterval(funcion,interalo, argumentos1) //funcion que se ejecuta de manera infinita con un intervalo de tiempo
+_________________________________________________________________________________________
+►►►►JSON
+-Transformar un objeto JSON a un string formato JSON
+
+let objJson = {     // esto es un objeto JSON
+  "nombre": "Juan",
+  "edad": 40
+}
+
+let cadenaJson = JSON.stringify(objJson)
+
+
+-Transformar un string formato JSON a un objeto JSON
+let objJson = JSON.parse(cadenaJson);
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+DEPENDENCIAS NECESARIAS
+EXPRESS
+npm i express
+
+MONGOOSE
+npm i mongoose
+
+DOTENV
+npm i dotenv
+
+En app.js  > Es donde se ejecutará nuestra aplicacion y desde donde haremos las llamadas (peticiones)
+tambien es donde conectaremos la base de datos mongodb y escucharemos con el puerto definido en
+el archivo .env (Puerto y enlace de mongodb)
+
+Una vez hagamos las peticiones este llamara al archivo de rutas metidos en la carpeta routes (pueden ser users.js o cervezas.js)
+Estos archivos rutas contendrán todas las rutas y sus llamadas a funciones de los archivos en controllers 
+Ej: si llamamos a los /users en app.js > routes > users.js > /(getUsers) > controllers > users.js > const getUsers...
+si tuvieramos mas rutas en vez de solo /(gestUsers) ej: /:id (getUser) para cojer solo un usuario, nos llevaría a la funcion
+específica de users.js de controllers 
